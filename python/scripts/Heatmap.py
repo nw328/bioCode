@@ -10,14 +10,15 @@ import pandas as pd
 import numpy as np
 from matplotlib.backends.backend_pdf import PdfPages
 
-#%pylab inline
+#%%pylab inline
 
-test_csv=pd.read_csv('heatmap_test.csv')
+test_csv=pd.read_csv('../data/heatmap_test.csv')
 x1=test_csv['X']
 y1=test_csv['Y']
 z1=test_csv['Value']
-
+#%%
 p = test_csv.pivot(columns='X', index='Y', values='Value')
+#%%
 plotdf = test_csv.pivot(columns='X', index='Y', values='Plot')
 '''
 thr=test_csv.pivot(columns='X', index='Y', values='Thrips')
@@ -27,12 +28,12 @@ thrn = (thr - thr.mean()) / (thr.max() - thr.min())
 '''
 
 normval = (p- p.mean()) / (p.max() - p.min())
-
+#%%
 
 fig, ax = plt.subplots()
 p4=p.fillna(0) #fill blank plots with 0's 
 heatmap = plt.pcolor(normval, cmap=plt.cm.Reds, alpha=0.9)
-
+#%%
 for y in range(p4.shape[0]):
     for x in range(p4.shape[1]):
         plt.text(x+0.5, y+0.5, 
@@ -41,7 +42,7 @@ for y in range(p4.shape[0]):
                  horizontalalignment='center',
                  verticalalignment='center',
                  )  
-
+#%%
                 
 fig = plt.gcf()
 
